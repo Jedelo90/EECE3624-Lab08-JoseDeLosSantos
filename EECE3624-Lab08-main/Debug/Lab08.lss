@@ -1,0 +1,572 @@
+
+Lab08.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000066  00800100  00000296  0000030a  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000296  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .comment      00000030  00000000  00000000  00000370  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000003a0  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000068  00000000  00000000  000003e0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000ba3  00000000  00000000  00000448  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 0000093c  00000000  00000000  00000feb  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000004fe  00000000  00000000  00001927  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  000000b8  00000000  00000000  00001e28  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000004b7  00000000  00000000  00001ee0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    0000022b  00000000  00000000  00002397  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000048  00000000  00000000  000025c2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	45 c0       	rjmp	.+138    	; 0x8c <__ctors_end>
+   2:	00 00       	nop
+   4:	58 c0       	rjmp	.+176    	; 0xb6 <__bad_interrupt>
+   6:	00 00       	nop
+   8:	56 c0       	rjmp	.+172    	; 0xb6 <__bad_interrupt>
+   a:	00 00       	nop
+   c:	54 c0       	rjmp	.+168    	; 0xb6 <__bad_interrupt>
+   e:	00 00       	nop
+  10:	52 c0       	rjmp	.+164    	; 0xb6 <__bad_interrupt>
+  12:	00 00       	nop
+  14:	50 c0       	rjmp	.+160    	; 0xb6 <__bad_interrupt>
+  16:	00 00       	nop
+  18:	4e c0       	rjmp	.+156    	; 0xb6 <__bad_interrupt>
+  1a:	00 00       	nop
+  1c:	4c c0       	rjmp	.+152    	; 0xb6 <__bad_interrupt>
+  1e:	00 00       	nop
+  20:	4a c0       	rjmp	.+148    	; 0xb6 <__bad_interrupt>
+  22:	00 00       	nop
+  24:	48 c0       	rjmp	.+144    	; 0xb6 <__bad_interrupt>
+  26:	00 00       	nop
+  28:	46 c0       	rjmp	.+140    	; 0xb6 <__bad_interrupt>
+  2a:	00 00       	nop
+  2c:	44 c0       	rjmp	.+136    	; 0xb6 <__bad_interrupt>
+  2e:	00 00       	nop
+  30:	42 c0       	rjmp	.+132    	; 0xb6 <__bad_interrupt>
+  32:	00 00       	nop
+  34:	40 c0       	rjmp	.+128    	; 0xb6 <__bad_interrupt>
+  36:	00 00       	nop
+  38:	3e c0       	rjmp	.+124    	; 0xb6 <__bad_interrupt>
+  3a:	00 00       	nop
+  3c:	3c c0       	rjmp	.+120    	; 0xb6 <__bad_interrupt>
+  3e:	00 00       	nop
+  40:	3a c0       	rjmp	.+116    	; 0xb6 <__bad_interrupt>
+  42:	00 00       	nop
+  44:	38 c0       	rjmp	.+112    	; 0xb6 <__bad_interrupt>
+  46:	00 00       	nop
+  48:	36 c0       	rjmp	.+108    	; 0xb6 <__bad_interrupt>
+  4a:	00 00       	nop
+  4c:	34 c0       	rjmp	.+104    	; 0xb6 <__bad_interrupt>
+  4e:	00 00       	nop
+  50:	32 c0       	rjmp	.+100    	; 0xb6 <__bad_interrupt>
+  52:	00 00       	nop
+  54:	30 c0       	rjmp	.+96     	; 0xb6 <__bad_interrupt>
+  56:	00 00       	nop
+  58:	2e c0       	rjmp	.+92     	; 0xb6 <__bad_interrupt>
+  5a:	00 00       	nop
+  5c:	2c c0       	rjmp	.+88     	; 0xb6 <__bad_interrupt>
+  5e:	00 00       	nop
+  60:	2a c0       	rjmp	.+84     	; 0xb6 <__bad_interrupt>
+  62:	00 00       	nop
+  64:	28 c0       	rjmp	.+80     	; 0xb6 <__bad_interrupt>
+  66:	00 00       	nop
+  68:	26 c0       	rjmp	.+76     	; 0xb6 <__bad_interrupt>
+  6a:	00 00       	nop
+  6c:	24 c0       	rjmp	.+72     	; 0xb6 <__bad_interrupt>
+  6e:	00 00       	nop
+  70:	22 c0       	rjmp	.+68     	; 0xb6 <__bad_interrupt>
+  72:	00 00       	nop
+  74:	20 c0       	rjmp	.+64     	; 0xb6 <__bad_interrupt>
+  76:	00 00       	nop
+  78:	1e c0       	rjmp	.+60     	; 0xb6 <__bad_interrupt>
+  7a:	00 00       	nop
+  7c:	1c c0       	rjmp	.+56     	; 0xb6 <__bad_interrupt>
+  7e:	00 00       	nop
+  80:	1a c0       	rjmp	.+52     	; 0xb6 <__bad_interrupt>
+  82:	00 00       	nop
+  84:	18 c0       	rjmp	.+48     	; 0xb6 <__bad_interrupt>
+  86:	00 00       	nop
+  88:	16 c0       	rjmp	.+44     	; 0xb6 <__bad_interrupt>
+	...
+
+0000008c <__ctors_end>:
+  8c:	11 24       	eor	r1, r1
+  8e:	1f be       	out	0x3f, r1	; 63
+  90:	cf ef       	ldi	r28, 0xFF	; 255
+  92:	d0 e1       	ldi	r29, 0x10	; 16
+  94:	de bf       	out	0x3e, r29	; 62
+  96:	cd bf       	out	0x3d, r28	; 61
+
+00000098 <__do_copy_data>:
+  98:	11 e0       	ldi	r17, 0x01	; 1
+  9a:	a0 e0       	ldi	r26, 0x00	; 0
+  9c:	b1 e0       	ldi	r27, 0x01	; 1
+  9e:	e6 e9       	ldi	r30, 0x96	; 150
+  a0:	f2 e0       	ldi	r31, 0x02	; 2
+  a2:	00 e0       	ldi	r16, 0x00	; 0
+  a4:	0b bf       	out	0x3b, r16	; 59
+  a6:	02 c0       	rjmp	.+4      	; 0xac <__do_copy_data+0x14>
+  a8:	07 90       	elpm	r0, Z+
+  aa:	0d 92       	st	X+, r0
+  ac:	a6 36       	cpi	r26, 0x66	; 102
+  ae:	b1 07       	cpc	r27, r17
+  b0:	d9 f7       	brne	.-10     	; 0xa8 <__do_copy_data+0x10>
+  b2:	36 d0       	rcall	.+108    	; 0x120 <main>
+  b4:	ee c0       	rjmp	.+476    	; 0x292 <_exit>
+
+000000b6 <__bad_interrupt>:
+  b6:	a4 cf       	rjmp	.-184    	; 0x0 <__vectors>
+
+000000b8 <blink_led0>:
+#define LED0_ON()	(LED0_PORT &= ~ (1 << LED0_BIT) )
+#define LED0_OFF()	(LED0_PORT |= (1 << LED0_BIT) )
+
+void blink_led0(void)
+{
+	LED0_ON();
+  b8:	a8 98       	cbi	0x15, 0	; 21
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  ba:	2f ef       	ldi	r18, 0xFF	; 255
+  bc:	8f ea       	ldi	r24, 0xAF	; 175
+  be:	91 e0       	ldi	r25, 0x01	; 1
+  c0:	21 50       	subi	r18, 0x01	; 1
+  c2:	80 40       	sbci	r24, 0x00	; 0
+  c4:	90 40       	sbci	r25, 0x00	; 0
+  c6:	e1 f7       	brne	.-8      	; 0xc0 <blink_led0+0x8>
+  c8:	00 c0       	rjmp	.+0      	; 0xca <blink_led0+0x12>
+  ca:	00 00       	nop
+	_delay_ms(75);
+	LED0_OFF();
+  cc:	a8 9a       	sbi	0x15, 0	; 21
+  ce:	08 95       	ret
+
+000000d0 <print_str>:
+}
+
+void print_str(const char *s)
+{
+  d0:	0f 93       	push	r16
+  d2:	1f 93       	push	r17
+  d4:	cf 93       	push	r28
+  d6:	fc 01       	movw	r30, r24
+		unsigned char i = 0;
+		while ( s[i] != '\0' )		// stop at null terminator
+  d8:	80 81       	ld	r24, Z
+  da:	88 23       	and	r24, r24
+  dc:	51 f0       	breq	.+20     	; 0xf2 <print_str+0x22>
+  de:	8f 01       	movw	r16, r30
+  e0:	c0 e0       	ldi	r28, 0x00	; 0
+		{
+			uart_tx( s[i] );		// character to send
+  e2:	a5 d0       	rcall	.+330    	; 0x22e <uart_tx>
+			i++;					// on to the next one
+  e4:	cf 5f       	subi	r28, 0xFF	; 255
+}
+
+void print_str(const char *s)
+{
+		unsigned char i = 0;
+		while ( s[i] != '\0' )		// stop at null terminator
+  e6:	f8 01       	movw	r30, r16
+  e8:	ec 0f       	add	r30, r28
+  ea:	f1 1d       	adc	r31, r1
+  ec:	80 81       	ld	r24, Z
+  ee:	81 11       	cpse	r24, r1
+  f0:	f8 cf       	rjmp	.-16     	; 0xe2 <print_str+0x12>
+		{
+			uart_tx( s[i] );		// character to send
+			i++;					// on to the next one
+		}
+}
+  f2:	cf 91       	pop	r28
+  f4:	1f 91       	pop	r17
+  f6:	0f 91       	pop	r16
+  f8:	08 95       	ret
+
+000000fa <print_startup>:
+
+// Start up display message
+void print_startup(void)
+{
+		
+		print_str("\r\n\r\n");			// two CR-LF pairs
+  fa:	88 e5       	ldi	r24, 0x58	; 88
+  fc:	91 e0       	ldi	r25, 0x01	; 1
+  fe:	e8 df       	rcall	.-48     	; 0xd0 <print_str>
+		print_str("RS232 Communications Server\r\n" );
+ 100:	80 e0       	ldi	r24, 0x00	; 0
+ 102:	91 e0       	ldi	r25, 0x01	; 1
+ 104:	e5 df       	rcall	.-54     	; 0xd0 <print_str>
+		print_str("Status: Active\r\n");
+ 106:	8e e1       	ldi	r24, 0x1E	; 30
+ 108:	91 e0       	ldi	r25, 0x01	; 1
+ 10a:	e2 df       	rcall	.-60     	; 0xd0 <print_str>
+		print_str("Jose De Los Santos\r\n");
+ 10c:	8f e2       	ldi	r24, 0x2F	; 47
+ 10e:	91 e0       	ldi	r25, 0x01	; 1
+ 110:	df df       	rcall	.-66     	; 0xd0 <print_str>
+		print_str("EECE3624\r\n");
+ 112:	84 e4       	ldi	r24, 0x44	; 68
+ 114:	91 e0       	ldi	r25, 0x01	; 1
+ 116:	dc df       	rcall	.-72     	; 0xd0 <print_str>
+		print_str("Fall 2026\r\n\r\n");	// two CR-LF pairs: last line followed by another blank line
+ 118:	8f e4       	ldi	r24, 0x4F	; 79
+ 11a:	91 e0       	ldi	r25, 0x01	; 1
+ 11c:	d9 cf       	rjmp	.-78     	; 0xd0 <print_str>
+ 11e:	08 95       	ret
+
+00000120 <main>:
+ 120:	a0 9a       	sbi	0x14, 0	; 20
+	unsigned char c;				// holds received char
+	unsigned char count = 0;		// keeps count for "end"
+
+	
+	LED0_DDR |= (1 << LED0_BIT);	// makes LED0 pin an output
+	LED0_OFF();
+ 122:	a8 9a       	sbi	0x15, 0	; 21
+
+	uart_init(BAUDRATE, DATABITS, STOPBITS, PARITY);
+ 124:	00 e0       	ldi	r16, 0x00	; 0
+ 126:	21 e0       	ldi	r18, 0x01	; 1
+ 128:	48 e0       	ldi	r20, 0x08	; 8
+ 12a:	60 e8       	ldi	r22, 0x80	; 128
+ 12c:	75 e2       	ldi	r23, 0x25	; 37
+ 12e:	80 e0       	ldi	r24, 0x00	; 0
+ 130:	90 e0       	ldi	r25, 0x00	; 0
+ 132:	33 d0       	rcall	.+102    	; 0x19a <uart_init>
+	print_startup();
+ 134:	e2 df       	rcall	.-60     	; 0xfa <print_startup>
+ 136:	c0 e0       	ldi	r28, 0x00	; 0
+
+int main(void)
+{
+	/* Your code here.  */
+	unsigned char c;				// holds received char
+	unsigned char count = 0;		// keeps count for "end"
+ 138:	01 e0       	ldi	r16, 0x01	; 1
+			}
+		
+		// "end" special case exit
+			if ( count == 0 && c == 'e')
+			{
+				count = 1;					// an 'e' was detected, increment the count
+ 13a:	10 e0       	ldi	r17, 0x00	; 0
+ 13c:	68 94       	set
+			}
+			else if ( count == 1 && c == 'n' )
+			{
+				count = 2;					// currently at "en"
+ 13e:	ff 24       	eor	r15, r15
+ 140:	f1 f8       	bld	r15, 1
+	uart_init(BAUDRATE, DATABITS, STOPBITS, PARITY);
+	print_startup();
+	while(1)
+	{
+									/* your loop code here */
+		c = uart_rx();				// wait for PuTTY input
+ 142:	7d d0       	rcall	.+250    	; 0x23e <uart_rx>
+ 144:	d8 2f       	mov	r29, r24
+		blink_led0();				// LED0 blinks; acknowledged
+ 146:	b8 df       	rcall	.-144    	; 0xb8 <blink_led0>
+		
+		if ( c == ESC)				//soft reset from keyboard
+ 148:	db 31       	cpi	r29, 0x1B	; 27
+ 14a:	19 f4       	brne	.+6      	; 0x152 <main+0x32>
+		{
+			print_startup();		// outputs the display message again
+ 14c:	d6 df       	rcall	.-84     	; 0xfa <print_startup>
+			count = 0;				// sets/resets the count to 0	
+ 14e:	c1 2f       	mov	r28, r17
+ 150:	f8 cf       	rjmp	.-16     	; 0x142 <main+0x22>
+		}
+		else
+		{
+			uart_tx(c);					// echo the input back
+ 152:	8d 2f       	mov	r24, r29
+ 154:	6c d0       	rcall	.+216    	; 0x22e <uart_tx>
+			if (c == CR)
+ 156:	dd 30       	cpi	r29, 0x0D	; 13
+ 158:	29 f4       	brne	.+10     	; 0x164 <main+0x44>
+			{
+				uart_tx(LF);			// include an LF because CR must form a pair with LF
+ 15a:	8a e0       	ldi	r24, 0x0A	; 10
+ 15c:	68 d0       	rcall	.+208    	; 0x22e <uart_tx>
+ 15e:	cc 23       	and	r28, r28
+			}
+		
+		// "end" special case exit
+			if ( count == 0 && c == 'e')
+ 160:	79 f0       	breq	.+30     	; 0x180 <main+0x60>
+ 162:	05 c0       	rjmp	.+10     	; 0x16e <main+0x4e>
+ 164:	c1 11       	cpse	r28, r1
+ 166:	03 c0       	rjmp	.+6      	; 0x16e <main+0x4e>
+ 168:	d5 36       	cpi	r29, 0x65	; 101
+ 16a:	51 f4       	brne	.+20     	; 0x180 <main+0x60>
+ 16c:	12 c0       	rjmp	.+36     	; 0x192 <main+0x72>
+ 16e:	c1 30       	cpi	r28, 0x01	; 1
+			{
+				count = 1;					// an 'e' was detected, increment the count
+			}
+			else if ( count == 1 && c == 'n' )
+ 170:	19 f4       	brne	.+6      	; 0x178 <main+0x58>
+ 172:	de 36       	cpi	r29, 0x6E	; 110
+ 174:	29 f4       	brne	.+10     	; 0x180 <main+0x60>
+ 176:	0f c0       	rjmp	.+30     	; 0x196 <main+0x76>
+ 178:	c2 30       	cpi	r28, 0x02	; 2
+			{
+				count = 2;					// currently at "en"
+			}		
+			else if(  count == 2 && c == 'd' )
+ 17a:	11 f4       	brne	.+4      	; 0x180 <main+0x60>
+ 17c:	d4 36       	cpi	r29, 0x64	; 100
+ 17e:	29 f0       	breq	.+10     	; 0x18a <main+0x6a>
+ 180:	c0 2f       	mov	r28, r16
+			}
+		
+		// "end" special case exit
+			if ( count == 0 && c == 'e')
+			{
+				count = 1;					// an 'e' was detected, increment the count
+ 182:	d5 36       	cpi	r29, 0x65	; 101
+ 184:	f1 f2       	breq	.-68     	; 0x142 <main+0x22>
+ 186:	c1 2f       	mov	r28, r17
+ 188:	dc cf       	rjmp	.-72     	; 0x142 <main+0x22>
+				count = 0;					// streak broken, restart count
+			}
+		
+			if ( count == 3 )				// "end" keyword matched
+			{
+				print_str("\r\n\r\nBye");	// two CR-LF pairs followed by display message "Bye"
+ 18a:	8d e5       	ldi	r24, 0x5D	; 93
+ 18c:	91 e0       	ldi	r25, 0x01	; 1
+ 18e:	a0 df       	rcall	.-192    	; 0xd0 <print_str>
+ 190:	ff cf       	rjmp	.-2      	; 0x190 <main+0x70>
+ 192:	c0 2f       	mov	r28, r16
+			}
+		
+		// "end" special case exit
+			if ( count == 0 && c == 'e')
+			{
+				count = 1;					// an 'e' was detected, increment the count
+ 194:	d6 cf       	rjmp	.-84     	; 0x142 <main+0x22>
+ 196:	cf 2d       	mov	r28, r15
+			}
+			else if ( count == 1 && c == 'n' )
+			{
+				count = 2;					// currently at "en"
+ 198:	d4 cf       	rjmp	.-88     	; 0x142 <main+0x22>
+
+0000019a <uart_init>:
+ 19a:	0f 93       	push	r16
+// No error checking is performed and the function does not return a value.
+//
+// For example,
+//     usart1_init(9600,8,1,0);
+// sets the baudrate to 9600, with 8 data bits, 1 stop bit, and no parity
+void uart_init(long unsigned int baudrate, unsigned char databits, unsigned char stopbits, unsigned char parity) {
+ 19c:	cf 93       	push	r28
+ 19e:	df 93       	push	r29
+ 1a0:	d4 2f       	mov	r29, r20
+ 1a2:	c2 2f       	mov	r28, r18
+											/* your code here */
+	unsigned int ubrr;								// baud rate register value
+	
+	// set baud rate (via UBRR1 *H*igh and *L*ow registers)
+   ubrr = ( F_OSC / (16UL * baudrate ) ) - 1;		// asynchronous mode
+ 1a4:	dc 01       	movw	r26, r24
+ 1a6:	cb 01       	movw	r24, r22
+ 1a8:	88 0f       	add	r24, r24
+ 1aa:	99 1f       	adc	r25, r25
+ 1ac:	aa 1f       	adc	r26, r26
+ 1ae:	bb 1f       	adc	r27, r27
+ 1b0:	88 0f       	add	r24, r24
+ 1b2:	99 1f       	adc	r25, r25
+ 1b4:	aa 1f       	adc	r26, r26
+ 1b6:	bb 1f       	adc	r27, r27
+ 1b8:	9c 01       	movw	r18, r24
+ 1ba:	ad 01       	movw	r20, r26
+ 1bc:	22 0f       	add	r18, r18
+ 1be:	33 1f       	adc	r19, r19
+ 1c0:	44 1f       	adc	r20, r20
+ 1c2:	55 1f       	adc	r21, r21
+ 1c4:	22 0f       	add	r18, r18
+ 1c6:	33 1f       	adc	r19, r19
+ 1c8:	44 1f       	adc	r20, r20
+ 1ca:	55 1f       	adc	r21, r21
+ 1cc:	60 e0       	ldi	r22, 0x00	; 0
+ 1ce:	70 e8       	ldi	r23, 0x80	; 128
+ 1d0:	80 e7       	ldi	r24, 0x70	; 112
+ 1d2:	90 e0       	ldi	r25, 0x00	; 0
+ 1d4:	3c d0       	rcall	.+120    	; 0x24e <__udivmodsi4>
+ 1d6:	21 50       	subi	r18, 0x01	; 1
+ 1d8:	31 09       	sbc	r19, r1
+   UBRR1H = ( unsigned char )( ubrr >> 8);			// upper 4 bits
+ 1da:	30 93 98 00 	sts	0x0098, r19	; 0x800098 <__TEXT_REGION_LENGTH__+0x7e0098>
+   UBRR1L = ( unsigned char )ubrr;					// lower 8 bits
+ 1de:	20 93 99 00 	sts	0x0099, r18	; 0x800099 <__TEXT_REGION_LENGTH__+0x7e0099>
+	
+	// set databits (options 7 or 8)
+	if ( databits == 7)
+ 1e2:	d7 30       	cpi	r29, 0x07	; 7
+ 1e4:	21 f4       	brne	.+8      	; 0x1ee <uart_init+0x54>
+	{
+		UCSR1C = ( 1 << UCSZ11 );					// 7 databits option selected
+ 1e6:	84 e0       	ldi	r24, 0x04	; 4
+ 1e8:	80 93 9d 00 	sts	0x009D, r24	; 0x80009d <__TEXT_REGION_LENGTH__+0x7e009d>
+ 1ec:	03 c0       	rjmp	.+6      	; 0x1f4 <uart_init+0x5a>
+	}
+	else
+	{
+		UCSR1C = (1 << UCSZ11)|(1 <<UCSZ10);		// 8 databits option selected
+ 1ee:	86 e0       	ldi	r24, 0x06	; 6
+ 1f0:	80 93 9d 00 	sts	0x009D, r24	; 0x80009d <__TEXT_REGION_LENGTH__+0x7e009d>
+	}
+	    
+	// set parity
+	if ( parity == 1 )
+ 1f4:	01 30       	cpi	r16, 0x01	; 1
+ 1f6:	31 f4       	brne	.+12     	; 0x204 <uart_init+0x6a>
+	{	
+		UCSR1C |= ( 1 << UPM11 )| ( 1 << UPM10 ); // sets bits for odd parity
+ 1f8:	ed e9       	ldi	r30, 0x9D	; 157
+ 1fa:	f0 e0       	ldi	r31, 0x00	; 0
+ 1fc:	80 81       	ld	r24, Z
+ 1fe:	80 63       	ori	r24, 0x30	; 48
+ 200:	80 83       	st	Z, r24
+ 202:	07 c0       	rjmp	.+14     	; 0x212 <uart_init+0x78>
+	}
+   else if ( parity == 2 )
+ 204:	02 30       	cpi	r16, 0x02	; 2
+ 206:	29 f4       	brne	.+10     	; 0x212 <uart_init+0x78>
+   {
+	   UCSR1C |= ( 1 << UPM11);						// sets bits for even parity
+ 208:	ed e9       	ldi	r30, 0x9D	; 157
+ 20a:	f0 e0       	ldi	r31, 0x00	; 0
+ 20c:	80 81       	ld	r24, Z
+ 20e:	80 62       	ori	r24, 0x20	; 32
+ 210:	80 83       	st	Z, r24
+   }
+	// 0 parity option is implied, no need to manually set
+   
+    // set stopbits
+	if ( stopbits == 2 )
+ 212:	c2 30       	cpi	r28, 0x02	; 2
+ 214:	29 f4       	brne	.+10     	; 0x220 <uart_init+0x86>
+	{
+		UCSR1C |= ( 1 << USBS1 );					// 2 stop bit option	
+ 216:	ed e9       	ldi	r30, 0x9D	; 157
+ 218:	f0 e0       	ldi	r31, 0x00	; 0
+ 21a:	80 81       	ld	r24, Z
+ 21c:	88 60       	ori	r24, 0x08	; 8
+ 21e:	80 83       	st	Z, r24
+	}
+	// 0 stopbit option is also implied, no need to manually set
+	
+	// receiver and transmitter enable
+    UCSR1B = (1 << RXEN1)|(1 << TXEN1);	 // enable only Receiver Enable and Transmitter Enable
+ 220:	88 e1       	ldi	r24, 0x18	; 24
+ 222:	80 93 9a 00 	sts	0x009A, r24	; 0x80009a <__TEXT_REGION_LENGTH__+0x7e009a>
+	// Line 52 simultaneously sets UPM12 = 0
+	
+}
+ 226:	df 91       	pop	r29
+ 228:	cf 91       	pop	r28
+ 22a:	0f 91       	pop	r16
+ 22c:	08 95       	ret
+
+0000022e <uart_tx>:
+					// is available, the function places an unsigned character value (passed in
+					// as the function's only argument) in the buffer and returns. No error
+					// checking is performed and the function does not return a value.
+void uart_tx(unsigned char data) {
+    /* your code here */
+	while( !(UCSR1A & (1 << UDRE1)  ) ); // Wait for empty buffer line
+ 22e:	eb e9       	ldi	r30, 0x9B	; 155
+ 230:	f0 e0       	ldi	r31, 0x00	; 0
+ 232:	90 81       	ld	r25, Z
+ 234:	95 ff       	sbrs	r25, 5
+ 236:	fd cf       	rjmp	.-6      	; 0x232 <uart_tx+0x4>
+	UDR1 = data;						 // Write data
+ 238:	80 93 9c 00 	sts	0x009C, r24	; 0x80009c <__TEXT_REGION_LENGTH__+0x7e009c>
+ 23c:	08 95       	ret
+
+0000023e <uart_rx>:
+					// buffer. Once a character arrives, it is passed back to the caller as
+					// an unsigned character. No error checking is performed.
+unsigned char uart_rx(void) {
+								/* your code here */
+    
+	while ( !(UCSR1A & (1 << RXC1) ) );
+ 23e:	eb e9       	ldi	r30, 0x9B	; 155
+ 240:	f0 e0       	ldi	r31, 0x00	; 0
+ 242:	80 81       	ld	r24, Z
+ 244:	88 23       	and	r24, r24
+ 246:	ec f7       	brge	.-6      	; 0x242 <uart_rx+0x4>
+	return UDR1;
+ 248:	80 91 9c 00 	lds	r24, 0x009C	; 0x80009c <__TEXT_REGION_LENGTH__+0x7e009c>
+	
+ 24c:	08 95       	ret
+
+0000024e <__udivmodsi4>:
+ 24e:	a1 e2       	ldi	r26, 0x21	; 33
+ 250:	1a 2e       	mov	r1, r26
+ 252:	aa 1b       	sub	r26, r26
+ 254:	bb 1b       	sub	r27, r27
+ 256:	fd 01       	movw	r30, r26
+ 258:	0d c0       	rjmp	.+26     	; 0x274 <__udivmodsi4_ep>
+
+0000025a <__udivmodsi4_loop>:
+ 25a:	aa 1f       	adc	r26, r26
+ 25c:	bb 1f       	adc	r27, r27
+ 25e:	ee 1f       	adc	r30, r30
+ 260:	ff 1f       	adc	r31, r31
+ 262:	a2 17       	cp	r26, r18
+ 264:	b3 07       	cpc	r27, r19
+ 266:	e4 07       	cpc	r30, r20
+ 268:	f5 07       	cpc	r31, r21
+ 26a:	20 f0       	brcs	.+8      	; 0x274 <__udivmodsi4_ep>
+ 26c:	a2 1b       	sub	r26, r18
+ 26e:	b3 0b       	sbc	r27, r19
+ 270:	e4 0b       	sbc	r30, r20
+ 272:	f5 0b       	sbc	r31, r21
+
+00000274 <__udivmodsi4_ep>:
+ 274:	66 1f       	adc	r22, r22
+ 276:	77 1f       	adc	r23, r23
+ 278:	88 1f       	adc	r24, r24
+ 27a:	99 1f       	adc	r25, r25
+ 27c:	1a 94       	dec	r1
+ 27e:	69 f7       	brne	.-38     	; 0x25a <__udivmodsi4_loop>
+ 280:	60 95       	com	r22
+ 282:	70 95       	com	r23
+ 284:	80 95       	com	r24
+ 286:	90 95       	com	r25
+ 288:	9b 01       	movw	r18, r22
+ 28a:	ac 01       	movw	r20, r24
+ 28c:	bd 01       	movw	r22, r26
+ 28e:	cf 01       	movw	r24, r30
+ 290:	08 95       	ret
+
+00000292 <_exit>:
+ 292:	f8 94       	cli
+
+00000294 <__stop_program>:
+ 294:	ff cf       	rjmp	.-2      	; 0x294 <__stop_program>
