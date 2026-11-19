@@ -17,7 +17,7 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   6 .debug_abbrev 0000093c  00000000  00000000  00000feb  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   000004fe  00000000  00000000  00001927  2**0
+  7 .debug_line   000004ff  00000000  00000000  00001927  2**0
                   CONTENTS, READONLY, DEBUGGING
   8 .debug_frame  000000b8  00000000  00000000  00001e28  2**2
                   CONTENTS, READONLY, DEBUGGING
@@ -131,9 +131,9 @@ Disassembly of section .text:
   b6:	a4 cf       	rjmp	.-184    	; 0x0 <__vectors>
 
 000000b8 <blink_led0>:
-#define LED0_ON()	(LED0_PORT &= ~ (1 << LED0_BIT) )
-#define LED0_OFF()	(LED0_PORT |= (1 << LED0_BIT) )
 
+// acknowledges that a character was received
+// turns on for 75ms then off
 void blink_led0(void)
 {
 	LED0_ON();
@@ -161,6 +161,7 @@ void blink_led0(void)
 000000d0 <print_str>:
 }
 
+// sends null-terminated string, one character at a time
 void print_str(const char *s)
 {
   d0:	0f 93       	push	r16
@@ -168,23 +169,23 @@ void print_str(const char *s)
   d4:	cf 93       	push	r28
   d6:	fc 01       	movw	r30, r24
 		unsigned char i = 0;
-		while ( s[i] != '\0' )		// stop at null terminator
+		while (s[i] != '\0')				// stop at null terminator
   d8:	80 81       	ld	r24, Z
   da:	88 23       	and	r24, r24
   dc:	51 f0       	breq	.+20     	; 0xf2 <print_str+0x22>
   de:	8f 01       	movw	r16, r30
   e0:	c0 e0       	ldi	r28, 0x00	; 0
 		{
-			uart_tx( s[i] );		// character to send
+			uart_tx(s[i]);					// character to send
   e2:	a5 d0       	rcall	.+330    	; 0x22e <uart_tx>
-			i++;					// on to the next one
+			i++;							// on to the next one
   e4:	cf 5f       	subi	r28, 0xFF	; 255
-}
 
+// sends null-terminated string, one character at a time
 void print_str(const char *s)
 {
 		unsigned char i = 0;
-		while ( s[i] != '\0' )		// stop at null terminator
+		while (s[i] != '\0')				// stop at null terminator
   e6:	f8 01       	movw	r30, r16
   e8:	ec 0f       	add	r30, r28
   ea:	f1 1d       	adc	r31, r1
@@ -192,8 +193,8 @@ void print_str(const char *s)
   ee:	81 11       	cpse	r24, r1
   f0:	f8 cf       	rjmp	.-16     	; 0xe2 <print_str+0x12>
 		{
-			uart_tx( s[i] );		// character to send
-			i++;					// on to the next one
+			uart_tx(s[i]);					// character to send
+			i++;							// on to the next one
 		}
 }
   f2:	cf 91       	pop	r28
@@ -203,31 +204,31 @@ void print_str(const char *s)
 
 000000fa <print_startup>:
 
-// Start up display message
+// start up display message
+// repeats when a hard reset is triggered or "esc" is pressed
 void print_startup(void)
-{
-		
-		print_str("\r\n\r\n");			// two CR-LF pairs
+{	
+	print_str("\r\n\r\n");					// two CR-LF pairs
   fa:	88 e5       	ldi	r24, 0x58	; 88
   fc:	91 e0       	ldi	r25, 0x01	; 1
   fe:	e8 df       	rcall	.-48     	; 0xd0 <print_str>
-		print_str("RS232 Communications Server\r\n" );
+	print_str("RS232 Communications Server\r\n");
  100:	80 e0       	ldi	r24, 0x00	; 0
  102:	91 e0       	ldi	r25, 0x01	; 1
  104:	e5 df       	rcall	.-54     	; 0xd0 <print_str>
-		print_str("Status: Active\r\n");
+	print_str("Status: Active\r\n");
  106:	8e e1       	ldi	r24, 0x1E	; 30
  108:	91 e0       	ldi	r25, 0x01	; 1
  10a:	e2 df       	rcall	.-60     	; 0xd0 <print_str>
-		print_str("Jose De Los Santos\r\n");
+	print_str("Jose De Los Santos\r\n");
  10c:	8f e2       	ldi	r24, 0x2F	; 47
  10e:	91 e0       	ldi	r25, 0x01	; 1
  110:	df df       	rcall	.-66     	; 0xd0 <print_str>
-		print_str("EECE3624\r\n");
+	print_str("EECE3624\r\n");
  112:	84 e4       	ldi	r24, 0x44	; 68
  114:	91 e0       	ldi	r25, 0x01	; 1
  116:	dc df       	rcall	.-72     	; 0xd0 <print_str>
-		print_str("Fall 2026\r\n\r\n");	// two CR-LF pairs: last line followed by another blank line
+	print_str("Fall 2026\r\n\r\n");			// two CR-LF pairs: last line followed by another blank line		
  118:	8f e4       	ldi	r24, 0x4F	; 79
  11a:	91 e0       	ldi	r25, 0x01	; 1
  11c:	d9 cf       	rjmp	.-78     	; 0xd0 <print_str>
@@ -235,11 +236,11 @@ void print_startup(void)
 
 00000120 <main>:
  120:	a0 9a       	sbi	0x14, 0	; 20
-	unsigned char c;				// holds received char
-	unsigned char count = 0;		// keeps count for "end"
-
+{
+	unsigned char c;						// holds received char
+	unsigned char count = 0;				// letters "end" matched in a row 
 	
-	LED0_DDR |= (1 << LED0_BIT);	// makes LED0 pin an output
+	LED0_DDR |= (1 << LED0_BIT);			// makes LED0 pin an output
 	LED0_OFF();
  122:	a8 9a       	sbi	0x15, 0	; 21
 
@@ -255,65 +256,65 @@ void print_startup(void)
 	print_startup();
  134:	e2 df       	rcall	.-60     	; 0xfa <print_startup>
  136:	c0 e0       	ldi	r28, 0x00	; 0
+}
 
 int main(void)
 {
-	/* Your code here.  */
-	unsigned char c;				// holds received char
-	unsigned char count = 0;		// keeps count for "end"
+	unsigned char c;						// holds received char
+	unsigned char count = 0;				// letters "end" matched in a row 
  138:	01 e0       	ldi	r16, 0x01	; 1
 			}
 		
 		// "end" special case exit
-			if ( count == 0 && c == 'e')
+			if (count == 0 && c == 'e')
 			{
-				count = 1;					// an 'e' was detected, increment the count
+				count = 1;					// an 'e' was detected, set count to 1
  13a:	10 e0       	ldi	r17, 0x00	; 0
  13c:	68 94       	set
 			}
-			else if ( count == 1 && c == 'n' )
+			else if (count == 1 && c == 'n')
 			{
 				count = 2;					// currently at "en"
  13e:	ff 24       	eor	r15, r15
  140:	f1 f8       	bld	r15, 1
+
 	uart_init(BAUDRATE, DATABITS, STOPBITS, PARITY);
 	print_startup();
 	while(1)
 	{
-									/* your loop code here */
-		c = uart_rx();				// wait for PuTTY input
+		c = uart_rx();						// wait for PuTTY input
  142:	7d d0       	rcall	.+250    	; 0x23e <uart_rx>
  144:	d8 2f       	mov	r29, r24
-		blink_led0();				// LED0 blinks; acknowledged
+		blink_led0();						// acknowledges character receipt through LED blink
  146:	b8 df       	rcall	.-144    	; 0xb8 <blink_led0>
 		
-		if ( c == ESC)				//soft reset from keyboard
+		if (c == ESC)						// Esc --> soft reset
  148:	db 31       	cpi	r29, 0x1B	; 27
  14a:	19 f4       	brne	.+6      	; 0x152 <main+0x32>
 		{
-			print_startup();		// outputs the display message again
+			print_startup();				// outputs the display message again
  14c:	d6 df       	rcall	.-84     	; 0xfa <print_startup>
-			count = 0;				// sets/resets the count to 0	
+			count = 0;						// forget any partial letters from "end"
  14e:	c1 2f       	mov	r28, r17
  150:	f8 cf       	rjmp	.-16     	; 0x142 <main+0x22>
 		}
 		else
 		{
-			uart_tx(c);					// echo the input back
+			uart_tx(c);						// echo the input back
  152:	8d 2f       	mov	r24, r29
  154:	6c d0       	rcall	.+216    	; 0x22e <uart_tx>
 			if (c == CR)
  156:	dd 30       	cpi	r29, 0x0D	; 13
  158:	29 f4       	brne	.+10     	; 0x164 <main+0x44>
 			{
-				uart_tx(LF);			// include an LF because CR must form a pair with LF
+				uart_tx(LF);				// include LF, PuTTY only sends CR
  15a:	8a e0       	ldi	r24, 0x0A	; 10
  15c:	68 d0       	rcall	.+208    	; 0x22e <uart_tx>
  15e:	cc 23       	and	r28, r28
 			}
 		
 		// "end" special case exit
-			if ( count == 0 && c == 'e')
+			if (count == 0 && c == 'e')
  160:	79 f0       	breq	.+30     	; 0x180 <main+0x60>
  162:	05 c0       	rjmp	.+10     	; 0x16e <main+0x4e>
  164:	c1 11       	cpse	r28, r1
@@ -323,9 +324,9 @@ int main(void)
  16c:	12 c0       	rjmp	.+36     	; 0x192 <main+0x72>
  16e:	c1 30       	cpi	r28, 0x01	; 1
 			{
-				count = 1;					// an 'e' was detected, increment the count
+				count = 1;					// an 'e' was detected, set count to 1
 			}
-			else if ( count == 1 && c == 'n' )
+			else if (count == 1 && c == 'n')
  170:	19 f4       	brne	.+6      	; 0x178 <main+0x58>
  172:	de 36       	cpi	r29, 0x6E	; 110
  174:	29 f4       	brne	.+10     	; 0x180 <main+0x60>
@@ -334,7 +335,7 @@ int main(void)
 			{
 				count = 2;					// currently at "en"
 			}		
-			else if(  count == 2 && c == 'd' )
+			else if(count == 2 && c == 'd')
  17a:	11 f4       	brne	.+4      	; 0x180 <main+0x60>
  17c:	d4 36       	cpi	r29, 0x64	; 100
  17e:	29 f0       	breq	.+10     	; 0x18a <main+0x6a>
@@ -342,9 +343,9 @@ int main(void)
 			}
 		
 		// "end" special case exit
-			if ( count == 0 && c == 'e')
+			if (count == 0 && c == 'e')
 			{
-				count = 1;					// an 'e' was detected, increment the count
+				count = 1;					// an 'e' was detected, set count to 1
  182:	d5 36       	cpi	r29, 0x65	; 101
  184:	f1 f2       	breq	.-68     	; 0x142 <main+0x22>
  186:	c1 2f       	mov	r28, r17
@@ -352,7 +353,7 @@ int main(void)
 				count = 0;					// streak broken, restart count
 			}
 		
-			if ( count == 3 )				// "end" keyword matched
+			if (count == 3)					// "end" keyword matched
 			{
 				print_str("\r\n\r\nBye");	// two CR-LF pairs followed by display message "Bye"
  18a:	8d e5       	ldi	r24, 0x5D	; 93
@@ -363,13 +364,13 @@ int main(void)
 			}
 		
 		// "end" special case exit
-			if ( count == 0 && c == 'e')
+			if (count == 0 && c == 'e')
 			{
-				count = 1;					// an 'e' was detected, increment the count
+				count = 1;					// an 'e' was detected, set count to 1
  194:	d6 cf       	rjmp	.-84     	; 0x142 <main+0x22>
  196:	cf 2d       	mov	r28, r15
 			}
-			else if ( count == 1 && c == 'n' )
+			else if (count == 1 && c == 'n')
 			{
 				count = 2;					// currently at "en"
  198:	d4 cf       	rjmp	.-88     	; 0x142 <main+0x22>
@@ -386,11 +387,11 @@ void uart_init(long unsigned int baudrate, unsigned char databits, unsigned char
  19e:	df 93       	push	r29
  1a0:	d4 2f       	mov	r29, r20
  1a2:	c2 2f       	mov	r28, r18
-											/* your code here */
-	unsigned int ubrr;								// baud rate register value
+
+	unsigned int ubrr;							// baud rate register value
 	
 	// set baud rate (via UBRR1 *H*igh and *L*ow registers)
-   ubrr = ( F_OSC / (16UL * baudrate ) ) - 1;		// asynchronous mode
+	ubrr = (F_OSC / (16UL * baudrate)) - 1;		// asynchronous normal mode ( U2X1 = 0 )
  1a4:	dc 01       	movw	r26, r24
  1a6:	cb 01       	movw	r24, r22
  1a8:	88 0f       	add	r24, r24
@@ -418,34 +419,34 @@ void uart_init(long unsigned int baudrate, unsigned char databits, unsigned char
  1d4:	3c d0       	rcall	.+120    	; 0x24e <__udivmodsi4>
  1d6:	21 50       	subi	r18, 0x01	; 1
  1d8:	31 09       	sbc	r19, r1
-   UBRR1H = ( unsigned char )( ubrr >> 8);			// upper 4 bits
+	UBRR1H = (unsigned char)(ubrr >> 8);		// upper 4 bits
  1da:	30 93 98 00 	sts	0x0098, r19	; 0x800098 <__TEXT_REGION_LENGTH__+0x7e0098>
-   UBRR1L = ( unsigned char )ubrr;					// lower 8 bits
+	UBRR1L = (unsigned char)ubrr;				// lower 8 bits
  1de:	20 93 99 00 	sts	0x0099, r18	; 0x800099 <__TEXT_REGION_LENGTH__+0x7e0099>
 	
 	// set databits (options 7 or 8)
-	if ( databits == 7)
+	if (databits == 7)
  1e2:	d7 30       	cpi	r29, 0x07	; 7
  1e4:	21 f4       	brne	.+8      	; 0x1ee <uart_init+0x54>
 	{
-		UCSR1C = ( 1 << UCSZ11 );					// 7 databits option selected
+		UCSR1C = (1 << UCSZ11);					// 7 databits option selected
  1e6:	84 e0       	ldi	r24, 0x04	; 4
  1e8:	80 93 9d 00 	sts	0x009D, r24	; 0x80009d <__TEXT_REGION_LENGTH__+0x7e009d>
  1ec:	03 c0       	rjmp	.+6      	; 0x1f4 <uart_init+0x5a>
 	}
 	else
 	{
-		UCSR1C = (1 << UCSZ11)|(1 <<UCSZ10);		// 8 databits option selected
+		UCSR1C = (1 << UCSZ11)|(1 << UCSZ10);	// 8 databits option selected
  1ee:	86 e0       	ldi	r24, 0x06	; 6
  1f0:	80 93 9d 00 	sts	0x009D, r24	; 0x80009d <__TEXT_REGION_LENGTH__+0x7e009d>
 	}
 	    
 	// set parity
-	if ( parity == 1 )
+	if (parity == 1)
  1f4:	01 30       	cpi	r16, 0x01	; 1
  1f6:	31 f4       	brne	.+12     	; 0x204 <uart_init+0x6a>
 	{	
-		UCSR1C |= ( 1 << UPM11 )| ( 1 << UPM10 ); // sets bits for odd parity
+		UCSR1C |= (1 << UPM11)| (1 << UPM10);	// sets bits for odd parity
  1f8:	ed e9       	ldi	r30, 0x9D	; 157
  1fa:	f0 e0       	ldi	r31, 0x00	; 0
  1fc:	80 81       	ld	r24, Z
@@ -453,38 +454,39 @@ void uart_init(long unsigned int baudrate, unsigned char databits, unsigned char
  200:	80 83       	st	Z, r24
  202:	07 c0       	rjmp	.+14     	; 0x212 <uart_init+0x78>
 	}
-   else if ( parity == 2 )
+	else if (parity == 2)
  204:	02 30       	cpi	r16, 0x02	; 2
  206:	29 f4       	brne	.+10     	; 0x212 <uart_init+0x78>
-   {
-	   UCSR1C |= ( 1 << UPM11);						// sets bits for even parity
+    {
+	   UCSR1C |= (1 << UPM11);					// sets bits for even parity
  208:	ed e9       	ldi	r30, 0x9D	; 157
  20a:	f0 e0       	ldi	r31, 0x00	; 0
  20c:	80 81       	ld	r24, Z
  20e:	80 62       	ori	r24, 0x20	; 32
  210:	80 83       	st	Z, r24
    }
-	// 0 parity option is implied, no need to manually set
+	
+	// parity = 0 UPM11:10 remain 0
    
     // set stopbits
-	if ( stopbits == 2 )
+	if (stopbits == 2)
  212:	c2 30       	cpi	r28, 0x02	; 2
  214:	29 f4       	brne	.+10     	; 0x220 <uart_init+0x86>
 	{
-		UCSR1C |= ( 1 << USBS1 );					// 2 stop bit option	
+		UCSR1C |= (1 << USBS1);					// 2 stop bit option	
  216:	ed e9       	ldi	r30, 0x9D	; 157
  218:	f0 e0       	ldi	r31, 0x00	; 0
  21a:	80 81       	ld	r24, Z
  21c:	88 60       	ori	r24, 0x08	; 8
  21e:	80 83       	st	Z, r24
 	}
-	// 0 stopbit option is also implied, no need to manually set
+	// stop bit = 0 USBS1 remains 0
 	
 	// receiver and transmitter enable
-    UCSR1B = (1 << RXEN1)|(1 << TXEN1);	 // enable only Receiver Enable and Transmitter Enable
+    UCSR1B = (1 << RXEN1)|(1 << TXEN1);			// enables receiver and transmitter
  220:	88 e1       	ldi	r24, 0x18	; 24
  222:	80 93 9a 00 	sts	0x009A, r24	; 0x80009a <__TEXT_REGION_LENGTH__+0x7e009a>
-	// Line 52 simultaneously sets UPM12 = 0
+	// writing UCSR1B clears UCSZ12, which helps set bits for 7/8 data bits
 	
 }
  226:	df 91       	pop	r29
@@ -493,36 +495,35 @@ void uart_init(long unsigned int baudrate, unsigned char databits, unsigned char
  22c:	08 95       	ret
 
 0000022e <uart_tx>:
-					// is available, the function places an unsigned character value (passed in
-					// as the function's only argument) in the buffer and returns. No error
-					// checking is performed and the function does not return a value.
+// This function waits for space in the USART transmit buffer. When space
+// is available, the function places an unsigned character value (passed in
+// as the function's only argument) in the buffer and returns. No error
+	// checking is performed and the function does not return a value.
 void uart_tx(unsigned char data) {
-    /* your code here */
-	while( !(UCSR1A & (1 << UDRE1)  ) ); // Wait for empty buffer line
+	while(!(UCSR1A & (1 << UDRE1)));			// wait until UDR1 is emptY, UDRE1 = 1 
  22e:	eb e9       	ldi	r30, 0x9B	; 155
  230:	f0 e0       	ldi	r31, 0x00	; 0
  232:	90 81       	ld	r25, Z
  234:	95 ff       	sbrs	r25, 5
  236:	fd cf       	rjmp	.-6      	; 0x232 <uart_tx+0x4>
-	UDR1 = data;						 // Write data
+	UDR1 = data;								// load the byte and send it to TXD1
  238:	80 93 9c 00 	sts	0x009C, r24	; 0x80009c <__TEXT_REGION_LENGTH__+0x7e009c>
  23c:	08 95       	ret
 
 0000023e <uart_rx>:
-					// buffer. Once a character arrives, it is passed back to the caller as
-					// an unsigned character. No error checking is performed.
+
+// This function blocks until a character is received in the USART input
+// buffer. Once a character arrives, it is passed back to the caller as
+// an unsigned character. No error checking is performed.
 unsigned char uart_rx(void) {
-								/* your code here */
-    
-	while ( !(UCSR1A & (1 << RXC1) ) );
+	while (!(UCSR1A & (1 << RXC1)));			// wait until byte arrives, RXC1 = 1
  23e:	eb e9       	ldi	r30, 0x9B	; 155
  240:	f0 e0       	ldi	r31, 0x00	; 0
  242:	80 81       	ld	r24, Z
  244:	88 23       	and	r24, r24
  246:	ec f7       	brge	.-6      	; 0x242 <uart_rx+0x4>
-	return UDR1;
+	return UDR1;								// read it and clear it
  248:	80 91 9c 00 	lds	r24, 0x009C	; 0x80009c <__TEXT_REGION_LENGTH__+0x7e009c>
-	
  24c:	08 95       	ret
 
 0000024e <__udivmodsi4>:
